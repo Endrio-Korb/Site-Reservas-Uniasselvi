@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container-fluid">
+    
+        {% for lab in laboratorios_reservados %}
+
+        <div class="row align-items-start">
+            <div class="col align-self-start">
+                {{ lab.nome_professor }}
+            </div>
+            <div class="col align-self-start">
+                {{ lab.nome_laboratorio.nome}} 
+            </div>
+            <div class="col align-self-start">
+                {{lab.bloco}}{{lab.nome_laboratorio.numero_sala}} 
+            </div>
+            <div class="col align-self-start">
+                {{ lab.periodo }} 
+            </div>
+        {% endfor %}
+            
+    </div>
+
+
+
+        
+
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    {% if salas %}
+        {% for sala in salas %}
+            <h4>{{sala.nome_professor }} Sala {{sala.numero_sala.numero_sala}} {{sala.periodo}}</h4>
+        {% endfor %}
+
+    {% endif %}
+
+    <h2>Teste</h2>
+
+{% endblock content %}

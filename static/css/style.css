@@ -1,0 +1,22 @@
+body {
+    background-color: rgb(145, 144, 144);
+}
+
+.menu {
+    color: rgb(22, 22, 22);
+    justify-content: left;
+
+}
+ 
+.mes {
+    justify-content: center;
+    color: black;
+    margin: 30px;
+}
+
+.wraper {
+    max-width: 760px;
+    margin:10px auto;
+    background-color: blueviolet;
+    padding: 40px;
+}

@@ -1,0 +1,12 @@
+from django.urls import path
+from django.views.generic import RedirectView
+
+from . import views
+
+app_name = 'login'
+
+
+urlpatterns = [
+    path("cadastro/", views.Cadastrar, name="cadastro"),
+    path("login", views.Login, name="login"),
+]

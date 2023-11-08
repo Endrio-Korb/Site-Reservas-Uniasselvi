@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+        <input type="date" name="data">
+        <input type="text" name="bloco">
+        <br>
+        <input type="submit" value="Consultar">
+        
+    </form>  
+    {{mensagem}}
+
+{% endblock content %}
