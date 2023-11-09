@@ -10,6 +10,27 @@ class Status(models.Model):
     def __str__(self):
         return self.nome_status
     
+class Periodos(models.Model):
+    id_periodo = models.IntegerField(null=False, blank=False)
+    nome_periodo = models.CharField(max_length=20, null=False, blank=False)
+  
+    class Meta:
+        db_table = "tb_periodos"
+
+    def __str__(self):
+        return self.nome_periodo
+
+
+class Blocos(models.Model):
+    id_bloco = models.IntegerField( null=False, blank=False)
+    bloco = models.CharField(max_length=1, null=False, blank=False)
+  
+    class Meta:
+        db_table = "tb_blocos"
+
+    def __str__(self):
+        return self.nome_bloco
+
 
 class Laboratorios(models.Model):
     blocos = [
@@ -31,13 +52,23 @@ class Laboratorios(models.Model):
     
 
 class ReservasLaboratorios(models.Model):
+    blocos = [
+        ('A', 'Bloco A'),
+        ('B', 'Bloco B'),
+        ('C', 'Bloco C'),
+    ]
+
+    periodos = [
+        ('Matutino', 'Matutino'),
+        ('Vespertino', 'Vespertino'),
+        ('Noturno', 'Noturno'),
+    ]
 
     nome_laboratorio = models.ForeignKey(Laboratorios, on_delete=models.CASCADE)
     data_reserva = models.DateField()
     nome_professor = models.CharField(max_length=100, null=False, blank=False)
-    periodo = models.CharField(max_length=20, null=False, blank=False)
-    estado = models.ForeignKey(Status, on_delete=models.CASCADE)
-    bloco = models.CharField(max_length=1, null=False, blank=False)
+    periodo = models.CharField(max_length=20, choices=periodos,null=False, blank=False)
+    bloco = models.CharField(max_length=1, choices=blocos ,null=False, blank=False)
 
     class Meta:
         db_table = "tb_reservas_laboratorios"

@@ -1,18 +1,54 @@
 from .models import ReservasLaboratorios, ReservasSalas, Laboratorios
+from .models import Periodos, Blocos
+
 from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect
-
-
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.urls import reverse_lazy
+
+from consulta.views import mostrarEnsalamentoLabs
+
 # Create your views here.
-class CriarReservaLaboratorio(CreateView):
-        model = ReservasLaboratorios
-        fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'estado', 'bloco']
-        template_name = 'reserva_laboratorio.html'
-        mensagem="Reserva registrada"
-        success_url = reverse_lazy('consulta:consulta')
+# class CriarReservaLaboratorio(CreateView):
+        
+#         model = ReservasLaboratorios
+#         fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'bloco']
+#         template_name = 'reserva_laboratorio.html'
+#         mensagem="Reserva registrada"
+#         success_url = reverse_lazy('consulta:consulta')
+
+
+def MostrarRegistroLaboratorio(request):
+
+    bloco = Blocos.objects.all()
+    periodos = Periodos.objects.all()
+    
+    return render(request, 'reserva_laboratorio.html', {'bloco':bloco,
+                                                        'periodos':periodos})
+
+# def CriarReservaLaboratorio(request):
+#     nome_lab = request.POST.get('nome_lab')
+#     data = request.POST.get('data_reserva')
+#     nome_prof = request.POST.get('nome_professor')
+#     periodo = request.POST.get('periodo')
+#     bloco =  request.POST.get('bloco')
+
+#     lab_reservados = ReservasLaboratorios.objects.filter(data_reserva=data).filter(bloco=bloco).filter(periodo)
+#     if lab_reservados:
+#         mensagem = f'O {nome_lab} já está reservado na data {data} e no periodo {periodo}'
+#         return render(request, 'reserva_laboratorio.html', {'mensagem': mensagem})
+#     else:
+#         reserva = ReservasLaboratorios.objects.create(
+#             nome_laboratorio = f'{nome_lab}',
+#             data_reserva = f'{data}',
+#             nome_professor = f'{nome_prof}',
+#             periodo = f'{periodo}',
+#             bloco = f'{bloco}',
+#         )
+#         reserva.save()
+#         mensagem = 'Reserva registrada com sucesso'
+#         return render(request, 'consulta.html', {'mensagem':mensagem})
 
 
 class CriarReservaSala(CreateView):
@@ -23,7 +59,7 @@ class CriarReservaSala(CreateView):
 
 class AtualizarReservaLaboratorio(UpdateView):
     model = ReservasLaboratorios
-    fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'estado', 'bloco']
+    fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'bloco']
     template_name = 'reserva_laboratorio.html'
     success_url = reverse_lazy('consulta:consulta')
 
