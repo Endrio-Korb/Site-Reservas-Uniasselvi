@@ -12,9 +12,14 @@ class Status(models.Model):
     
 
 class Laboratorios(models.Model):
+    blocos = [
+        ('A', 'Bloco A'),
+        ('B', 'Bloco B'),
+        ('C', 'Bloco C'),
+    ]
 
     nome = models.CharField(max_length=100, null=False, blank=False)
-    bloco = models.CharField(max_length=1, null=False, blank=False)
+    bloco = models.CharField(max_length=1, choices=blocos ,null=False, blank=False)
     numero_sala = models.IntegerField(null=False, blank=False)
     capacidade = models.IntegerField(null=False, blank=False)
 
