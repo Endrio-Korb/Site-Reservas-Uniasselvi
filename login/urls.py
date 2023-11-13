@@ -8,5 +8,6 @@ app_name = 'login'
 
 urlpatterns = [
     path("cadastro/", views.Cadastrar, name="cadastro"),
-    path("login", views.Login, name="login"),
+    path("login/", views.Login, name="login"),
+    path('', views.Sair, name='sair'),
 ]

@@ -19,6 +19,7 @@ from consulta.views import mostrarEnsalamentoLabs
 #         success_url = reverse_lazy('consulta:consulta')
 
 
+
 def ReservarLaboratorio(request):
     labs = Laboratorios.objects.all()
     blocos = Blocos.objects.all()

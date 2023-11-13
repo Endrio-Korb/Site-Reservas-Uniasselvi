@@ -1,7 +1,7 @@
 from django.shortcuts import render
 
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, logout
 # Create your views here.
 
 
@@ -44,3 +44,7 @@ def Cadastrar(request):
                 mensagem = "As senhas não são iguais"
                 return render(request, "cadastro.html", {"mensagem":mensagem})
             
+
+def Sair(request):
+    logout(request)
+    return render(request,'consulta.html')
