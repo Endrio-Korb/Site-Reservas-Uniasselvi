@@ -20,42 +20,42 @@ from consulta.views import mostrarEnsalamentoLabs
 
 
 def ReservarLaboratorio(request):
+    labs = Laboratorios.objects.all()
+    blocos = Blocos.objects.all()
+    periodos = Periodos.objects.all()
+
     if request.method == 'GET':
-        return render(request, 'reserva_laboratorio.html')
+        return render(request, 'reserva_laboratorio.html', {'labs': labs,
+                                                            'blocos': blocos,
+                                                            'periodos':periodos})
     else:
         bloco =  request.POST.get('bloco')
         data = request.POST.get('data')
         nome_lab = request.POST.get('nome_lab')
+        nome_professor = request.POST.get('nome_professor')
+        periodo = request.POST.get('periodo')
 
-        lista = [bloco, data, nome_lab]
-        return HttpResponse(lista)
-        # laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=nome_lab).filter(data_reserva=data).filter(bloco=bloco)
-        # if laboratorio:
-        #     return HttpResponse('Laboratório indisponível')
-        # else:
-
-# def CriarReservaLaboratorio(request):
-#     nome_lab = request.POST.get('nome_lab')
-#     data = request.POST.get('data_reserva')
-#     nome_prof = request.POST.get('nome_professor')
-#     periodo = request.POST.get('periodo')
-#     bloco =  request.POST.get('bloco')
-
-#     lab_reservados = ReservasLaboratorios.objects.filter(data_reserva=data).filter(bloco=bloco).filter(periodo)
-#     if lab_reservados:
-#         mensagem = f'O {nome_lab} já está reservado na data {data} e no periodo {periodo}'
-#         return render(request, 'reserva_laboratorio.html', {'mensagem': mensagem})
-#     else:
-#         reserva = ReservasLaboratorios.objects.create(
-#             nome_laboratorio = f'{nome_lab}',
-#             data_reserva = f'{data}',
-#             nome_professor = f'{nome_prof}',
-#             periodo = f'{periodo}',
-#             bloco = f'{bloco}',
-#         )
-#         reserva.save()
-#         mensagem = 'Reserva registrada com sucesso'
-#         return render(request, 'consulta.html', {'mensagem':mensagem})
+        nome_lab = nome_lab[:-6]
+        lab = Laboratorios.objects.only('id').get(nome=nome_lab).id
+        laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=lab).filter(data_reserva=data).filter(bloco=bloco)
+        
+        if laboratorio:
+            mensagem = f'{nome_lab} já está reservado para data {data} e periodo {periodo}'
+            return render(request, 'reserva_laboratorio.html', {'mensagem': mensagem,
+                                                                'labs': labs,
+                                                                'blocos': blocos,
+                                                                'periodos':periodos})
+        else:
+            reserva = ReservasLaboratorios.objects.create(
+                nome_laboratorio = f'{nome_lab}',
+                data_reserva = f'{data}',
+                nome_professor = f'{nome_professor}',
+                periodo = f'{periodo}',
+                bloco = f'{bloco}',
+            )
+            reserva.save()
+            mensagem = 'Reserva registrada com sucesso'
+            return render(request, 'consulta.html', {'mensagem': mensagem})
 
 
 class CriarReservaSala(CreateView):

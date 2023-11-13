@@ -2,20 +2,43 @@
 
 {% block content %}
 
-    <h4>Selecione a data e bloco para verificar a disponibilidade</h4>
-    <br>
-    <form action="{% url "reservas:reserva_laboratorio" %}" method='POST'> {% csrf_token %}
-        <input type="date" name='data'>
-        <select name="blocos" id="selecao_blocos">
+    <h2>{{ mensagem }}</h2>
+
+    <form action="{% url "reservas:reservar_laboratorio" %}" method='POST'> {% csrf_token %}
+        <h4>Informe o nome do professor</h4>
+        <input type="text" name='nome_professor'>
+        <br>
+
+        <h4>Selecione o Laboratório</h4>
+        <select name="nome_lab" id="selecao_labs">
             <option value=""></option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
+            {% for i in labs %}
+                <option value="{{i}}">{{i}}</option>
+            {% endfor %}
         </select>
+        
+        <h4>Selecione o Bloco</h4>
+        <select name="bloco" id="selecao_blocos">
+            <option value=""></option>
+            {% for i in blocos %}
+            <option value="{{i}}">{{i}}</option>
+
+            {% endfor %}
+        </select>
+
+        <h4>Selecione o periodo</h4>
+        <select name="periodo" id="selecao_periodo">
+            <option value=""></option>
+            {% for i in periodos %}
+                <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
+
+        <h4>Selecione a data</h4>
+        <input type="date" name='data'>
+        <br>
+
+        <input type="submit" value='Reservar'>
     </form>
-    <input type="submit" value='Consultar'>
-
-
-    {{ mensagem }}
 
 {% endblock content %}

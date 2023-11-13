@@ -6,8 +6,6 @@ from . import views
 
 app_name = "reservas"
 
-app_name = 'reservas'
-
 urlpatterns = [
     path('laboratorio/',  views.ReservarLaboratorio, name='reservar_laboratorio'),
 

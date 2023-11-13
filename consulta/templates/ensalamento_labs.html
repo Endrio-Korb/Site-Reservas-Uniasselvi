@@ -19,8 +19,8 @@
         <h4>Laboratórios disponíves</h4>
         {% if labs_disponiveis %}
             {% for item in labs_disponiveis.values %}
-                <h4 name='nome_lab'>{{item}}</h4>
-                <input type="submit" value='Reservar'>
+                <h4>{{item}}</h4>
+                <a href="{% url "reservas:reservar_laboratorio" %}">Reservar</a>
             {% endfor %}
         {% endif %}
     </form>
