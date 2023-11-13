@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 
 from reservas.models import ReservasLaboratorios, ReservasSalas, Laboratorios
 
@@ -13,33 +13,29 @@ def mostrarEnsalamentoLabs(request):
     data = request.POST.get('data')
 
     laboratorios = Laboratorios.objects.filter(bloco=bloco).order_by('nome')
+
     saida = {}
     lista_labs = []
     info_labs = []
-    lista_saida = []
-    item = 0
+    contador = 0
+
     for lab in laboratorios:
-        saida[lab] = f'{lab}'
+        saida[f'{lab}'] = f'{lab}'
 
     laboratorio_reservado = ReservasLaboratorios.objects.filter(bloco=bloco).filter(data_reserva=data).order_by('nome_laboratorio')
     if laboratorio_reservado:
         for lab_reservado in laboratorio_reservado:
-            #if saida[f'{lab}'] == lab:
-            #       saida[f'{lab_reservado}'] = lab_reservado
             lab_reservado = str(lab_reservado)
-            labs = lab_reservado.split()
-            lista_labs.append(labs)
-            info_labs = lista_labs[item]
-            nome_lab = f'{info_labs[0]} {info_labs[1]} {info_labs[2]} {info_labs[3]} {info_labs[4]}'
+            lista_labs.append(lab_reservado.split())
+            info_labs = lista_labs[contador]
+            nome_lab = f'{info_labs[0]} {info_labs[1]} {info_labs[2]} {info_labs[3]} {info_labs[4]} '
             perido = f'{info_labs[-1]}'
-            nome_professor = f'{info_labs[5:-2]}'
+            nome_professor = str(info_labs[5:-2])
+            contador += 1
 
-            if saida.get(nome_lab):
-                saida[nome_lab] = f'{nome_lab} {nome_professor} {data} {perido}'
-
-    for item in saida.keys():
-        lista_saida.append(item)
-
+            for item in saida:
+                if item == nome_lab:
+                    saida[item] = f'{nome_lab} {nome_professor} {data} {perido}'
 
 
     return render(request, 'ensalamento_labs.html', {'saida': saida})
