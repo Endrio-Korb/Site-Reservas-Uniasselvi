@@ -2,9 +2,27 @@
 
 {% block content %}
 
-    <div class="container-fluid">
+    {% for lab  in  laboratorios %}
     
-        {% for lab in laboratorios_reservados %}
+        {{laboratorios}}
+
+    {% endfor %}
+
+    {{ nome_lab }}
+
+    {% for item in saida %}
+        <h4>{{item}}</h4>
+    
+    
+    
+    {% endfor %}
+
+
+
+
+    {% comment %} <div class="container-fluid">
+    
+        {% for lab in laboratorios %}
 
         <div class="row align-items-start">
             <div class="col align-self-start">
@@ -19,7 +37,7 @@
             <div class="col align-self-start">
                 {{ lab.periodo }} 
             </div>
-        {% endfor %}
+        {% endfor %} {% endcomment %}
             
     </div>
 

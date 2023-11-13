@@ -20,12 +20,13 @@ from consulta.views import mostrarEnsalamentoLabs
 
 
 def MostrarRegistroLaboratorio(request):
+    if request.method == 'GET':
+        return render(request, 'reserva_laboratorio.html')
+    else:
+        bloco = request.POST.get('blocos')
+        data = request.POST.get('data')
 
-    bloco = Blocos.objects.all()
-    periodos = Periodos.objects.all()
-    
-    return render(request, 'reserva_laboratorio.html', {'bloco':bloco,
-                                                        'periodos':periodos})
+        return HttpResponse(data)
 
 # def CriarReservaLaboratorio(request):
 #     nome_lab = request.POST.get('nome_lab')

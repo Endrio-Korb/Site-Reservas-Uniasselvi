@@ -3,8 +3,15 @@
 {% block content %}
 
     <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+        <h4>Selecione a data</h4>
         <input type="date" name="data">
-        <input type="text" name="bloco">
+        <h4>Selecione o Bloco</h4>
+        <select name="blocos" id="selecao_blocos">
+            <option value=""></option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+        </select>
         <br>
         <input type="submit" value="Consultar">
         
