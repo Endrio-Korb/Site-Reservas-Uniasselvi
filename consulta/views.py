@@ -14,31 +14,26 @@ def mostrarEnsalamentoLabs(request):
 
     laboratorios = Laboratorios.objects.filter(bloco=bloco).order_by('nome')
 
-    saida = {}
+    labs_disponiveis = {}
     lista_labs = []
     info_labs = []
     contador = 0
 
     for lab in laboratorios:
-        saida[f'{lab}'] = f'{lab}'
+        labs_disponiveis[f'{lab}'] = f'{lab}'
 
-    laboratorio_reservado = ReservasLaboratorios.objects.filter(bloco=bloco).filter(data_reserva=data).order_by('nome_laboratorio')
-    if laboratorio_reservado:
-        for lab_reservado in laboratorio_reservado:
+    labs_reservados = ReservasLaboratorios.objects.filter(bloco=bloco).filter(data_reserva=data).order_by('nome_laboratorio')
+    if labs_reservados:
+        for lab_reservado in labs_reservados:
             lab_reservado = str(lab_reservado)
             lista_labs.append(lab_reservado.split())
             info_labs = lista_labs[contador]
             nome_lab = f'{info_labs[0]} {info_labs[1]} {info_labs[2]} {info_labs[3]} {info_labs[4]} '
-            perido = f'{info_labs[-1]}'
-            nome_professor = str(info_labs[5:-2])
             contador += 1
+            labs_disponiveis.pop(nome_lab)
 
-            for item in saida:
-                if item == nome_lab:
-                    saida[item] = f'{nome_lab} {nome_professor} {data} {perido}'
-
-
-    return render(request, 'ensalamento_labs.html', {'saida': saida,
+    return render(request, 'ensalamento_labs.html', {'labs_disponiveis': labs_disponiveis,
+                                                     'labs_reservados':labs_reservados,
                                                      'data':data,
                                                      'bloco':bloco})
 

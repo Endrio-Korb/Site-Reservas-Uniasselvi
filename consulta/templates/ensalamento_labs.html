@@ -3,13 +3,26 @@
 {% block content %}
 
     <form action="{% url 'reservas:reservar_laboratorio' %}" method="POST"> {% csrf_token %}
-        <h3 name="bloco">Bloco: {{bloco}}</h3>
-        <h3 name="data">Data: {{data}}</h3>
+        <h3 name="bloco">Bloco {{bloco}}</h3>
+        <h3 name="data">Data {{data}}</h3>
+        <br>
 
-        {% for item in saida.values %}
-            <h4 name='nome_lab'>{{item}}</h4>
-            <input type="submit" value='Reservas'>
-        {% endfor %}
+        <h4>Laboratórios Reservados</h4>
+        {% if labs_reservados %}
+            {% for item in labs_reservados %}
+            <h4> {{item}} </h4>
+            {% endfor %}
+        {% endif %}
+
+        <br>
+
+        <h4>Laboratórios disponíves</h4>
+        {% if labs_disponiveis %}
+            {% for item in labs_disponiveis.values %}
+                <h4 name='nome_lab'>{{item}}</h4>
+                <input type="submit" value='Reservas'>
+            {% endfor %}
+        {% endif %}
     </form>
  
 
