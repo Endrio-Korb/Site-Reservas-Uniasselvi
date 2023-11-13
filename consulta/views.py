@@ -38,7 +38,9 @@ def mostrarEnsalamentoLabs(request):
                     saida[item] = f'{nome_lab} {nome_professor} {data} {perido}'
 
 
-    return render(request, 'ensalamento_labs.html', {'saida': saida})
+    return render(request, 'ensalamento_labs.html', {'saida': saida,
+                                                     'data':data,
+                                                     'bloco':bloco})
 
 
 

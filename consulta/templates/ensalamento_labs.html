@@ -2,47 +2,15 @@
 
 {% block content %}
 
-    {% for lab  in  laboratorios %}
-    
-        {{laboratorios}}
+    <form action="{% url 'reservas:reservar_laboratorio' %}" method="POST"> {% csrf_token %}
+        <h3 name="bloco">Bloco: {{bloco}}</h3>
+        <h3 name="data">Data: {{data}}</h3>
 
-    {% endfor %}
-
-    {{ nome_lab }}
-
-    {% for item in saida.values %}
-        <h4>{{item}}</h4>
-    
-    
-    
-    {% endfor %}
-
-
-
-
-    {% comment %} <div class="container-fluid">
-    
-        {% for lab in laboratorios %}
-
-        <div class="row align-items-start">
-            <div class="col align-self-start">
-                {{ lab.nome_professor }}
-            </div>
-            <div class="col align-self-start">
-                {{ lab.nome_laboratorio.nome}} 
-            </div>
-            <div class="col align-self-start">
-                {{lab.bloco}}{{lab.nome_laboratorio.numero_sala}} 
-            </div>
-            <div class="col align-self-start">
-                {{ lab.periodo }} 
-            </div>
-        {% endfor %} {% endcomment %}
-            
-    </div>
-
-
-
-        
+        {% for item in saida.values %}
+            <h4 name='nome_lab'>{{item}}</h4>
+            <input type="submit" value='Reservas'>
+        {% endfor %}
+    </form>
+ 
 
 {% endblock content %}

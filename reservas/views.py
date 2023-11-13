@@ -19,14 +19,20 @@ from consulta.views import mostrarEnsalamentoLabs
 #         success_url = reverse_lazy('consulta:consulta')
 
 
-def MostrarRegistroLaboratorio(request):
+def ReservarLaboratorio(request):
     if request.method == 'GET':
         return render(request, 'reserva_laboratorio.html')
     else:
-        bloco = request.POST.get('blocos')
+        bloco = request.POST.get('bloco')
         data = request.POST.get('data')
+        nome_lab = request.POST.get('nome_lab')
 
-        return HttpResponse(data)
+        laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=nome_lab).filter(data_reserva=data).filter(bloco=bloco)
+        if laboratorio:
+            return HttpResponse('Laboratório indisponível')
+        else:
+            lista = [bloco, data, nome_lab]
+            return HttpResponse(lista)
 
 # def CriarReservaLaboratorio(request):
 #     nome_lab = request.POST.get('nome_lab')
