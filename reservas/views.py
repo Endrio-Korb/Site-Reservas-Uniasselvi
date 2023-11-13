@@ -23,16 +23,16 @@ def ReservarLaboratorio(request):
     if request.method == 'GET':
         return render(request, 'reserva_laboratorio.html')
     else:
-        bloco = request.POST.get('bloco')
+        bloco =  request.POST.get('bloco')
         data = request.POST.get('data')
         nome_lab = request.POST.get('nome_lab')
 
-        laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=nome_lab).filter(data_reserva=data).filter(bloco=bloco)
-        if laboratorio:
-            return HttpResponse('Laboratório indisponível')
-        else:
-            lista = [bloco, data, nome_lab]
-            return HttpResponse(lista)
+        lista = [bloco, data, nome_lab]
+        return HttpResponse(lista)
+        # laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=nome_lab).filter(data_reserva=data).filter(bloco=bloco)
+        # if laboratorio:
+        #     return HttpResponse('Laboratório indisponível')
+        # else:
 
 # def CriarReservaLaboratorio(request):
 #     nome_lab = request.POST.get('nome_lab')
