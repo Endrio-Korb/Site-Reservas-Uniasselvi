@@ -4,7 +4,7 @@ from .models import Periodos, Blocos
 from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect
 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-
+from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
 from consulta.views import mostrarEnsalamentoLabs
@@ -19,7 +19,7 @@ from consulta.views import mostrarEnsalamentoLabs
 #         success_url = reverse_lazy('consulta:consulta')
 
 
-
+@login_required
 def ReservarLaboratorio(request):
     labs = Laboratorios.objects.all()
     blocos = Blocos.objects.all()
