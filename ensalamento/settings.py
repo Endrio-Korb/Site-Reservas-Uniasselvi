@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     # Apps criados
     'reservas.apps.ReservasConfig',
     'consulta.apps.ConsultaConfig',
-    'usuarios.apps.UsuariosConfig',
 ]
 
 MIDDLEWARE = [

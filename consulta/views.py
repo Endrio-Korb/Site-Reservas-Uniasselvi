@@ -53,8 +53,3 @@ def mostrarEnsalamentoLabs(request):
 #         else:
 #             mensagem = "Bloco Inválido"
 #             return render(request, "consulta.html", {"mensagem": mensagem})
-
-def MostrarEnsalamentoSalas(request):
-    bloco = request.POST.get('bloco')
-    salas = ReservasSalas.objects.all().filter(bloco=bloco).order_by("numero_sala")
-    return render(request, "ensalamento_salas.html", {"salas":salas})
