@@ -43,10 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
 
-
+    # Apps criados
     'reservas.apps.ReservasConfig',
     'consulta.apps.ConsultaConfig',
-    'login.apps.LoginConfig',
+    'usuarios.apps.UsuariosConfig',
 ]
 
 MIDDLEWARE = [
