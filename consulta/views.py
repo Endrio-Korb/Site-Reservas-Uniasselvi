@@ -1,6 +1,6 @@
 from django.shortcuts import render, HttpResponse
 
-from reservas.models import ReservasLaboratorios, ReservasSalas, Laboratorios
+from reservas.models import ReservasLaboratorios, Laboratorios
 
 
 def consulta(request):

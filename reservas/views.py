@@ -1,4 +1,4 @@
-from .models import ReservasLaboratorios, ReservasSalas, Laboratorios
+from .models import ReservasLaboratorios, Laboratorios
 from .models import Periodos, Blocos
 
 from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect
@@ -36,7 +36,7 @@ def ReservarLaboratorio(request):
                                                                 'periodos':periodos})
         else:
             reserva = ReservasLaboratorios.objects.create(
-                nome_laboratorio = f'{nome_lab}',
+                nome_laboratorio = Laboratorios.objects.get(nome=nome_lab),
                 data_reserva = f'{data}',
                 nome_professor = f'{nome_professor}',
                 periodo = f'{periodo}',

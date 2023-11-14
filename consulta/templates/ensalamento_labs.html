@@ -3,7 +3,7 @@
 {% block content %}
 
     <div class="row">
-        <div class="col-md-5 offset-md-4">
+        <div class="col-md-8 offset-md-2">
             <div class="card-body">
                 <form action="{% url 'reservas:reservar_laboratorio' %}" method="POST"> {% csrf_token %}
                     <h3 class='card-title text-center' name="bloco">Bloco {{bloco}}</h3>
@@ -13,7 +13,7 @@
                     <h3 class='card-title text-center' >Laboratórios Reservados</h3>
                     {% if labs_reservados %}
                         {% for item in labs_reservados %}
-                        <h4 class='card-title' > {{item}} </h4>
+                        <h4 class='card-title text-center' >{{item}}</h4>
                         {% endfor %}
                     {% endif %}
             
@@ -22,8 +22,7 @@
                     <h3 class='card-title text-center' >Laboratórios disponíves</h3>
                     {% if labs_disponiveis %}
                         {% for item in labs_disponiveis.values %}
-                            <h4 class='card-title ' > {{item}} </h4>
-                            <a href="{% url "reservas:reservar_laboratorio" %} " class='btn btn-primary btn-block'>Reservar</a>
+                            <h4 class='card-title text-center ' > {{item}} </h4>
                         {% endfor %}
                     {% endif %}
                 </form>
