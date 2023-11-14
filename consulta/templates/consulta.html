@@ -3,19 +3,27 @@
 {% block content %}
 
     <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
-        <h4>Selecione a data</h4>
-        <input type="date" name="data">
-        <h4>Selecione o Bloco</h4>
-        <select name="blocos" id="selecao_blocos">
-            <option value=""></option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-        </select>
-        <br>
-        <input type="submit" value="Consultar">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <div class="card-body">
+                    <h4 class='card-title '>Selecione a data</h4>
+                    <input type="date" name="data">
+                    <h4 class='card-title '>Selecione o Bloco</h4>
+                    <select name="blocos" id="selecao_blocos">
+                        <option value=""></option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                    </select>
+                    <br>
+                    <button type='submit' class='btn btn-primary btn-block'>Consultar</button>
+                    {{mensagem}}
+                    {{ bloco }}
+                </form>  
+                </div>
+            </div>
+        </div>
         
-    </form>  
-    {{mensagem}}
-    {{ bloco }}
+        
+        
 {% endblock content %}

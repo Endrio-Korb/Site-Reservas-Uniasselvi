@@ -2,16 +2,29 @@
 
 {% block content %}
 
-    <form action="{% url 'login:login'%}" method="POST"> {% csrf_token %}
-        <input type="text" placeholder="Usuário..." name="usuario">
-        <br>
-        <input type="password" placeholder="Senha..." name="senha">
-        <br>
-        <input type="submit" value="Login">
-    </form>
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card auth-card">
+                <div class="card-body">
+                    <h4 class='card-title text-center'>Fazer login</h4>
 
-    <a href="{% url "login:cadastro" %}">Cadastrar</a>
+                    <form action="{% url "accounts:login" %}" method='POST'> {% csrf_token %}
+                        <input type="hidden" name='next' value='{{next}}'>
+                        
+                        <input type="text" placeholder="Usuário..." name="usuario">
+                        <br>
+                        <input type="password" placeholder="Senha..." name="senha">
+                        <br>
+                        <button type='submit' class='btn btn-primary btn-block'>Entrar</button>
 
-   {{mensagem}}
+                        <a href="{% url "accounts:cadastro" %}">Cadastrar</a>
+                    </form>
+                    
+                    {{mensagem}}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock content %}
