@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h2>{{ mensagem }}</h2>
+
+    <div class="rom">
+        <div class="com-md-4 offset-md-4">
+            <div class="card-body">
+
+                <form action="{% url "reservas:reservar_laboratorio" %}" method='POST'> {% csrf_token %}
+            
+                    <h4>Selecione o Bloco</h4>
+                    <select name="bloco" id="selecao_blocos">
+                        <option value=""></option>
+                        {% for i in blocos %}
+                        <option value="{{i}}">{{i}}</option>
+            
+                        {% endfor %}
+                    </select>
+            
+                    <h4>Selecione o periodo</h4>
+                    <select name="periodo" id="selecao_periodo">
+                        <option value=""></option>
+                        {% for i in periodos %}
+                            <option value="{{i}}">{{i}}</option>
+                        {% endfor %}
+                    </select>
+            
+                    <h4>Selecione a data</h4>
+                    <input type="date" name='data'>
+                    <br>
+            
+                    <button type='submit' class='btn btn-primary btn-block'>Consultar</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock content %}
