@@ -7,5 +7,6 @@ app_name = "reservas"
 urlpatterns = [
     path('laboratorio/',  views.ReservarLaboratorio, name='reservar_laboratorio'),
 
+
 ]
 

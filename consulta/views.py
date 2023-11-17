@@ -2,9 +2,6 @@ from django.shortcuts import render, HttpResponse
 
 from reservas.models import ReservasLaboratorios, Laboratorios
 
-from django.db.models import Value as V
-from django.db.models.functions import Concat
-
 
 def consulta(request):
     return render(request, "consulta.html")
@@ -41,11 +38,9 @@ def mostrarEnsalamentoLabs(request):
                                                      'bloco':bloco})
 
 
-def mostrarEnsalamentoNome(request):
-    data = request.POST.get('data')
-    nome_prof = request.POST.get('nome_professor')
 
-    labs_reservados = ReservasLaboratorios.objects.annotate(full_name=Concat('nome_professor', V(' '))).filter(full_name__icontains=nome_prof).filter(data_reserva=data).order_by('nome_laboratorio')
 
-    return render(request, 'ensalamento_labs_nome.html', {'labs_reservados': labs_reservados,
-                                                          'data':data})
+def MostrarEnsalamentoSalas(request):
+    bloco = request.POST.get('bloco')
+    salas = ReservasSalas.objects.all().filter(bloco=bloco).order_by("numero_sala")
+    return render(request, "ensalamento_salas.html", {"salas":salas})

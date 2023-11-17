@@ -75,30 +75,3 @@ class ReservasLaboratorios(models.Model):
 
     def __str__(self):
         return "{} {} {} {}".format(self.nome_laboratorio,self.nome_professor, self.data_reserva, self.periodo)
-
-
-class Salas(models.Model):
-
-    numero_sala = models.CharField(max_length=5,null=False, blank=False)
-    bloco = models.CharField(max_length=1, null=False, blank=False)
-    capacidade = models.IntegerField(null=False, blank=False)
-
-    class Meta:
-        db_table = "tb_salas"
-
-    def __str__(self):
-        return "{} {}".format(self.numero_sala, self.bloco)
-    
-
-class ReservasSalas(models.Model):
-
-    nome_professor = models.CharField(max_length=100, null=False, blank=False)
-    numero_sala = models.IntegerField(null=False, blank=False)
-    periodo = models.CharField(max_length=20, null=False, blank=False)
-    bloco = models.CharField(max_length=1, null=False, blank=False)
-
-    class Meta:
-        db_table = "tb_reserva_salas"
-
-    def __str__(self):
-        return "{}{} {} {}".format(self.bloco, self.numero_sala, self.nome_professor, self.periodo)

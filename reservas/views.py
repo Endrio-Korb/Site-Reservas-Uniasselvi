@@ -1,4 +1,4 @@
-from .models import ReservasLaboratorios, ReservasSalas, Laboratorios
+from .models import ReservasLaboratorios, Laboratorios
 from .models import Periodos, Blocos
 
 from django.shortcuts import render, get_object_or_404, HttpResponse, HttpResponseRedirect
@@ -6,18 +6,6 @@ from django.shortcuts import render, get_object_or_404, HttpResponse, HttpRespon
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
-
-from consulta.views import mostrarEnsalamentoLabs
-
-# Create your views here.
-# class CriarReservaLaboratorio(CreateView):
-        
-#         model = ReservasLaboratorios
-#         fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'bloco']
-#         template_name = 'reserva_laboratorio.html'
-#         mensagem="Reserva registrada"
-#         success_url = reverse_lazy('consulta:consulta')
-
 
 
 def ReservarLaboratorio(request):
