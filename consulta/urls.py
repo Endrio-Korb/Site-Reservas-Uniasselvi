@@ -7,5 +7,5 @@ app_name='consulta'
 urlpatterns = [
     path("", views.consulta, name='consulta'),
     path('ensalamento_labs/', views.mostrarEnsalamentoLabs, name="ensalamento_labs"),
-    path('ensalamento_salas/', views.MostrarEnsalamentoSalas, name="ensalamento_salas"),
+    path('ensalamento_labs_nome/', views.mostrarEnsalamentoNome, name='ensalamento_labs_nome')
 ]

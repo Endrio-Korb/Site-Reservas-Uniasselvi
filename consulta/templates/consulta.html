@@ -2,10 +2,14 @@
 
 {% block content %}
 
-    <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
-        <div class="row">
-            <div class="col-md-4 offset-md-4">
-                <div class="card-body">
+    <div class="row">
+        <div class="col-md-4 offset-md-4">
+            <div class="card-body">
+                <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+                    {{mensagem}}
+                    {{ bloco }}
+                    <h4 class="card-title">Consulta por Bloco</h4>
+                    <br>
                     <h4 class='card-title '>Selecione a data</h4>
                     <input type="date" name="data">
                     <h4 class='card-title '>Selecione o Bloco</h4>
@@ -15,14 +19,30 @@
                         <option value="B">B</option>
                         <option value="C">C</option>
                     </select>
-                    <br>
                     <button type='submit' class='btn btn-primary btn-block'>Consultar</button>
-                    {{mensagem}}
-                    {{ bloco }}
                 </form>  
-                </div>
             </div>
         </div>
+    </div>
+
+    <br>
+
+    <div class="rom">
+        <div class="col-md-4 offset-md-4">
+            <div class="card-body">
+
+                <form action="{% url "consulta:ensalamento_labs_nome" %}" method='POST'> {% csrf_token %}
+                    <h4 class="card-title">Consulta por nome do professor</h4>
+                    <br>
+                    <h4 class="card-tittle">Digite o nome do professor</h4>
+                    <input type="text" name='nome_professor'>
+                    <h4 class='card-title '>Selecione a data</h4>
+                    <input type="date" name="data">
+                    <button type='submit' class='btn btn-primary btn-block'>Consultar</button>
+                </form>
+            </div>
+        </div>
+    </div>
         
         
         

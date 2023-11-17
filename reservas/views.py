@@ -48,7 +48,7 @@ def ReservarLaboratorio(request):
                                                                 'periodos':periodos})
         else:
             reserva = ReservasLaboratorios.objects.create(
-                nome_laboratorio = f'{nome_lab}',
+                nome_laboratorio = Laboratorios.objects.get(nome=nome_lab),
                 data_reserva = f'{data}',
                 nome_professor = f'{nome_professor}',
                 periodo = f'{periodo}',
@@ -57,34 +57,3 @@ def ReservarLaboratorio(request):
             reserva.save()
             mensagem = 'Reserva registrada com sucesso'
             return render(request, 'consulta.html', {'mensagem': mensagem})
-
-
-class CriarReservaSala(CreateView):
-    model = ReservasSalas
-    fields = ['nome_professor', 'numero_sala', 'periodo', 'bloco']
-    template_name = 'reserva_salas.html'
-    success_url = reverse_lazy('consulta:consulta')
-
-class AtualizarReservaLaboratorio(UpdateView):
-    model = ReservasLaboratorios
-    fields = ['nome_laboratorio', 'data_reserva', 'nome_professor', 'periodo', 'bloco']
-    template_name = 'reserva_laboratorio.html'
-    success_url = reverse_lazy('consulta:consulta')
-
-class AtualizarReservaSala(UpdateView):
-    model = ReservasSalas
-    fields = ['nome_professor', 'numero_sala', 'periodo', 'bloco']
-    template_name = 'reserva_salas.html'
-    success_url = reverse_lazy('consulta:consulta')
-
-
-class DeletarReservaLaboratorio(DeleteView):
-    model = ReservasLaboratorios
-    template_name = 'excluir.html'
-    success_url = reverse_lazy('consulta:consulta')
-
-
-class DeletarReservaSala(DeleteView):
-    model = ReservasSalas
-    template_name = 'excluir.html'
-    success_url = reverse_lazy('consulta:consulta')
