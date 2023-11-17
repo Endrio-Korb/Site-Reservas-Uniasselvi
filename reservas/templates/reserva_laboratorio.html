@@ -10,6 +10,17 @@
         <h4 class="card-title">{{data}}</h4>
         <h4 class="card-title">{{periodo}}</h4>
 
+        <h4>Informe o nome do professor</h4>
+        <input type="text" name='nome_professor'>
+        <br>
+
+        <h4>Selecione o Laboratório</h4>
+        <select name="nome_lab" id="selecao_labs">
+            <option value=""></option>
+            {% for i in labs %}
+                <option value="{{i}}">{{i}}</option>
+            {% endfor %}
+        </select>
         
         <h4>Selecione o Bloco</h4>
         <select name="bloco" id="selecao_blocos">
