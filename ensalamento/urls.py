@@ -20,10 +20,10 @@ from django.views.generic import RedirectView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+    #path('accounts/', include('django.contrib.auth.urls')),
     path('consulta/', include('consulta.urls', namespace='consulta')),
     path('reservas/', include('reservas.urls', namespace='reservas')),
-    path('login/', include('login.urls', namespace='login')),
+    path('accounts/', include('login.urls', namespace='accounts')),
 ]
     
 urlpatterns += [path('', RedirectView.as_view(url='/consulta/', permanent=True)),]
