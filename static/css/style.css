@@ -3,3 +3,12 @@
 .auth-card {
     margin-bottom: 30px;
 }
+
+#requerido {
+    color: red;
+    text-decoration-color: red;
+}
+
+.body {
+    background-color: grey;
+}
