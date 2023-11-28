@@ -9,7 +9,7 @@
                 <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
                     <h4 class="card-title">Consulta por Bloco</h4>
                     <br>
-                    <h4 class="card-tittle" id='requerido'>{{mensagem}}</h4>
+                    <h4 class="card-title" id='requerido'>{{mensagem}}</h4>
                     <br>
                     <h4 class='card-title '>Selecione a data</h4>
                     <input type="date" name="data">
