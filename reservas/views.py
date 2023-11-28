@@ -18,12 +18,13 @@ def ReservarLaboratorio(request):
         periodo = request.POST.get('periodo')
         nome_lab = request.POST.get('nome_lab')
 
+        nome_lab = nome_lab[:-6]
         lab = Laboratorios.objects.only('id').get(nome=nome_lab).id
         laboratorio = ReservasLaboratorios.objects.filter(nome_laboratorio=lab).filter(data_reserva=data).filter(bloco=bloco)
 
         if laboratorio:
             mensagem = f'{nome_lab} já está reservado para data {data} e periodo {periodo}'
-            return render(request, 'reserva_laboratorio.html', {'mensagem': mensagem})
+            return render(request, 'consulta.html', {'mensagem': mensagem})
         else:
             reserva = ReservasLaboratorios.objects.create(
                 nome_laboratorio = Laboratorios.objects.get(nome=nome_lab),
