@@ -7,6 +7,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse_lazy
 
+from .forms import LocationForm
 
 def ReservarLaboratorio(request):
 
@@ -39,6 +40,8 @@ def ReservarLaboratorio(request):
         labs = Laboratorios.objects.all().order_by('bloco')
         blocos = Blocos.objects.all().order_by('bloco')
         periodos = Periodos.objects.all().order_by('id_periodo')
-        return render(request, 'reserva_laboratorio.html',{'labs': labs,
-                                                            'blocos': blocos,
-                                                            'periodos':periodos} )
+
+ 
+        return render(request, 'reserva_laboratorio.html',{'labs':labs,
+                                                           'blocos':blocos,
+                                                           'periodos':periodos} )

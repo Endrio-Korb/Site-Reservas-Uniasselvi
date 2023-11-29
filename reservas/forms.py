@@ -1,7 +1,8 @@
 from django import forms
 
-from .models import Task
+from .models import Laboratorios, Blocos
 
 
-class TaskForm(froms.ModelForm):
-    pass
+class LocationForm(forms.Form):
+    bloco = forms.ModelChoiceField(queryset=Blocos.objects.all())
+    laboratorio = forms.ModelChoiceField(queryset=Laboratorios.objects.none())

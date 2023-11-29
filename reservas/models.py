@@ -33,14 +33,8 @@ class Blocos(models.Model):
 
 
 class Laboratorios(models.Model):
-    blocos = [
-        ('A', 'Bloco A'),
-        ('B', 'Bloco B'),
-        ('C', 'Bloco C'),
-    ]
-
     nome = models.CharField(max_length=100, null=False, blank=False)
-    bloco = models.CharField(max_length=1, choices=blocos ,null=False, blank=False)
+    bloco = models.ForeignKey(Blocos, on_delete=models.CASCADE)
     numero_sala = models.IntegerField(null=False, blank=False)
     capacidade = models.IntegerField(null=False, blank=False)
 
@@ -52,23 +46,12 @@ class Laboratorios(models.Model):
     
 
 class ReservasLaboratorios(models.Model):
-    blocos = [
-        ('A', 'Bloco A'),
-        ('B', 'Bloco B'),
-        ('C', 'Bloco C'),
-    ]
 
-    periodos = [
-        ('Matutino', 'Matutino'),
-        ('Vespertino', 'Vespertino'),
-        ('Noturno', 'Noturno'),
-    ]
-
-    nome_laboratorio = models.ForeignKey(Laboratorios, on_delete=models.CASCADE)
+    periodo = models.ForeignKey(Periodos, on_delete=models.CASCADE)
+    bloco = models.ForeignKey(Blocos, on_delete=models.CASCADE)
     data_reserva = models.DateField()
+    nome_laboratorio = models.ForeignKey(Laboratorios, on_delete=models.CASCADE)
     nome_professor = models.CharField(max_length=100, null=False, blank=False)
-    periodo = models.CharField(max_length=20, choices=periodos,null=False, blank=False)
-    bloco = models.CharField(max_length=1, choices=blocos ,null=False, blank=False)
 
     class Meta:
         db_table = "tb_reservas_laboratorios"
