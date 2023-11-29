@@ -49,7 +49,7 @@ class ReservasLaboratorios(models.Model):
 
     periodo = models.ForeignKey(Periodos, on_delete=models.CASCADE)
     bloco = models.ForeignKey(Blocos, on_delete=models.CASCADE)
-    data_reserva = models.DateField()
+    data_reserva = models.DateField(null=False, blank=False)
     nome_laboratorio = models.ForeignKey(Laboratorios, on_delete=models.CASCADE)
     nome_professor = models.CharField(max_length=100, null=False, blank=False)
 
