@@ -54,6 +54,7 @@ def mostrarEnsalamentoLabs(request):
 def mostrarEnsalamentoLabsNome(request):
     data = request.POST.get('data')
     nome_prof = request.POST.get('nome_professor')
+    nome_prof = nome_prof.upper()
 
     if not data or not nome_prof:
         mensagem = 'Data ou nome do professor faltando'

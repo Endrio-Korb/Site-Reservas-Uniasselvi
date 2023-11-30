@@ -51,6 +51,7 @@ def registrarReservarLaboratorio(request):
             return render(request, 'consulta.html', {'contexto':contexto})
         
         else:
+            professor = professor.upper()
             reserva = ReservasLaboratorios.objects.create(
                 data_reserva = f'{data}',
                 nome_professor = f'{professor}',
