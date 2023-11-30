@@ -6,7 +6,7 @@
         <div class="col-md-8 offset-md-2">
             <div class="card-body">
                 <form action="{% url 'reservas:reservar_laboratorio' %}" method="POST"> {% csrf_token %}
-                    <h3 class='card-title text-center' name="bloco">Bloco {{bloco}}</h3>
+                    <h3 class='card-title text-center' name="bloco">Bloco {{bloco.bloco}}</h3>
                     <h3 class='card-title text-center' name="data">Data {{data}}</h3>
                     <br>
             

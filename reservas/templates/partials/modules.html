@@ -1,6 +1,23 @@
-<select  name="blocos" id="">
-    <option selected>Abra este menu</option>
+
+<!-- Data da Reserva -->
+<input type="date" name="data">
+
+<!-- Periodos -->
+<select name="periodo" >
+  <option selected>Selecione o Periodo</option>
+  {% for periodo in periodos %}
+     <option value="{{periodo.id}}">{{periodo.nome_periodo}}</option>
+  {% endfor %}
+</select>
+
+<!-- Laboratórios -->
+<select  name="nome_lab" id="">
+    <option selected>Selecione o Laboratório</option>
     {% for lab in laboratorios %}
        <option value="{{lab.id}}">{{lab.nome}}</option>
     {% endfor %}
  </select>
+
+<!-- Nome Professor -->
+ <input type="text" name='nome_professor' placeholder="Nome do professor">
+ <br>
