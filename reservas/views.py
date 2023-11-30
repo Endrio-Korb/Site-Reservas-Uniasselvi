@@ -48,6 +48,13 @@ from .forms import LocationForm
 #                                                            'periodos':periodos} )
 
 def ReservarLaboratorio(request):
-    labs = Laboratorios.objects.all()
-    contexto = {'labs': labs}
+    blocos = Blocos.objects.all()
+    contexto = {'blocos': blocos}
     return render(request, 'reserva_labs.html', contexto)
+
+
+def modules(request):
+    bloco = request.GET.get('blocos')
+    laboratorios = Laboratorios.objects.filter(bloco_id=bloco)
+    contexto = {'laboratorios': laboratorios}
+    return render(request, 'partials/modules.html', contexto)

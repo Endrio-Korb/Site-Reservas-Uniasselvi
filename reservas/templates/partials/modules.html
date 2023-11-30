@@ -1,0 +1,6 @@
+<select  name="blocos" id="">
+    <option selected>Abra este menu</option>
+    {% for lab in laboratorios %}
+       <option value="{{lab.id}}">{{lab.nome}}</option>
+    {% endfor %}
+ </select>
