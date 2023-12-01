@@ -6,10 +6,10 @@
         <div class="col-md-8 offset-md-2">
             <div class="card-body">
                 <form action="{% url 'reservas:reservar_laboratorio' %}" method="POST"> {% csrf_token %}
-                    <h3 class='card-title text-center' name="data">Data {{data}}</h3>
+                    <h3 name="data">Data {{data}}</h3>
                     <br>
             
-                    <h3 class='card-title text-center' >Laboratórios Reservados</h3>
+                    <h3>Laboratórios Reservados</h3>
                     {% if labs_reservados %}
                         {% for item in labs_reservados %}
                         <h4 class='card-title' > {{item}} </h4>

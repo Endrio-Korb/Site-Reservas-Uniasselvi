@@ -13,6 +13,9 @@ from professores.models import Professores
 
 from consulta import views
 
+
+from datetime import date
+
 def ReservarLaboratorio(request):
     blocos = Blocos.objects.all()
     professores = Professores.objects.all()

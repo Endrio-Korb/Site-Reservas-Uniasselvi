@@ -6,6 +6,7 @@ from django.db.models import Value as V
 from django.db.models.functions import Concat
 from django import forms
 
+from datetime import datetime
 
 def consulta(request):
     blocos = Blocos.objects.all()
@@ -18,13 +19,12 @@ def mostrarEnsalamentoLabs(request):
             
         bloco = request.POST.get('bloco')
         data = request.POST.get('data')
-    
-    
-        if not data or (type(bloco) == int):
-            bloco = Blocos.objects.all()
+
+        if not data or (type(bloco) == str()):
+            blocos = Blocos.objects.all()
             mensagem = 'Data ou Bloco faltando'
             return render(request, 'consulta.html', {'mensagem':mensagem,
-                                                     'blocos':bloco})
+                                                     'blocos':blocos})
 
         laboratorios = Laboratorios.objects.filter(bloco_id=bloco).order_by('nome')
 
@@ -45,16 +45,15 @@ def mostrarEnsalamentoLabs(request):
                 nome_lab = f'{info_labs[0]} {info_labs[1]} {info_labs[2]} {info_labs[3]} {info_labs[4]} '
                 contador += 1
                 labs_disponiveis.pop(nome_lab)
-
+                
         return render(request, 'ensalamento_labs.html', {'labs_disponiveis': labs_disponiveis,
                                                         'labs_reservados':labs_reservados,
                                                         'data':data,
                                                         'bloco':bloco})
 
 
-
-
 def mostrarEnsalamentoLabsNome(request):
+
     data = request.POST.get('data')
     nome_prof = request.POST.get('nome_professor')
     nome_prof = nome_prof.upper()
