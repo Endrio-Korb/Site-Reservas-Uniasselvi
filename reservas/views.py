@@ -9,7 +9,8 @@ from django.urls import reverse_lazy
 
 from .forms import LocationForm
 
-from app_professores.models import Professores
+from professores.models import Professores
+
 from consulta import views
 
 def ReservarLaboratorio(request):
@@ -56,8 +57,8 @@ def registrarReservarLaboratorio(request):
             professor = professor.title()
 
             salva_nome_professor = Professores.objects.create(
-                nome = f'{professor}'
-            )
+               nome = f'{professor}'
+           )
             salva_nome_professor.save()
 
             reserva = ReservasLaboratorios.objects.create(
