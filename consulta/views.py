@@ -18,8 +18,9 @@ def mostrarEnsalamentoLabs(request):
             
         bloco = request.POST.get('bloco')
         data = request.POST.get('data')
-
-        if not data or bloco != int:
+    
+    
+        if not data or (type(bloco) == int):
             bloco = Blocos.objects.all()
             mensagem = 'Data ou Bloco faltando'
             return render(request, 'consulta.html', {'mensagem':mensagem,

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Apps criados
     'reservas.apps.ReservasConfig',
     'consulta.apps.ConsultaConfig',
+    'app_professores.apps.AppProfessoresConfig',
 ]
 
 SITE_ID = 1

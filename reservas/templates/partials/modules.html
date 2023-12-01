@@ -19,5 +19,10 @@
  </select>
 
 <!-- Nome Professor -->
- <input type="text" name='nome_professor' placeholder="Nome do professor">
+ <input type="text" name='nome_professor' placeholder="Nome do professor" list='lista_professores'>
+ <datalist id='lista_professores'>
+      {% for professor in professores %}
+         <option value="{{professor.nome}}"></option>
+      {% endfor %}
+ </datalist>
  <br>

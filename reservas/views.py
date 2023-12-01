@@ -9,12 +9,14 @@ from django.urls import reverse_lazy
 
 from .forms import LocationForm
 
+from app_professores.models import Professores
 from consulta import views
 
 def ReservarLaboratorio(request):
     blocos = Blocos.objects.all()
-    contexto = {'blocos': blocos}
-    return render(request, 'reserva_labs.html', contexto)
+    professores = Professores.objects.all()
+    return render(request, 'reserva_labs.html', {'blocos': blocos,
+                                                 'professores':professores})
 
 
 def modules(request):
@@ -50,7 +52,14 @@ def registrarReservarLaboratorio(request):
             return render(request, 'consulta.html', {'contexto':contexto})
         
         else:
-            professor = professor.upper()
+            professor = professor.lower()
+            professor = professor.title()
+
+            salva_nome_professor = Professores.objects.create(
+                nome = f'{professor}'
+            )
+            salva_nome_professor.save()
+
             reserva = ReservasLaboratorios.objects.create(
                 data_reserva = f'{data}',
                 nome_professor = f'{professor}',
@@ -60,7 +69,6 @@ def registrarReservarLaboratorio(request):
             )
             reserva.save()
             mensagem = 'Reserva registrada com sucesso'
-            contexto = {'blocos': blocos,
-                        'mensagem': mensagem}
-            return render(request, 'consulta.html', {'contexto': contexto})
+            return render(request, 'consulta.html', {'blocos': blocos,
+                                                      'mensagem': mensagem})
         
