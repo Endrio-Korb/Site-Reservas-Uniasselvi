@@ -31,7 +31,6 @@ def modules(request):
 def registrarReservarLaboratorio(request):
     blocos = Blocos.objects.all()
     
-
     if request.method == 'POST':
         bloco = request.POST.get('blocos')
         data = request.POST.get('data')
@@ -64,4 +63,4 @@ def registrarReservarLaboratorio(request):
             contexto = {'blocos': blocos,
                         'mensagem': mensagem}
             return render(request, 'consulta.html', {'contexto': contexto})
-
+        

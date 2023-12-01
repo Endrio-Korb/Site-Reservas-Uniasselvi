@@ -6,10 +6,10 @@ from django.db.models import Value as V
 from django.db.models.functions import Concat
 from django import forms
 
+
 def consulta(request):
     blocos = Blocos.objects.all()
-    contexto = {'blocos': blocos}
-    return render(request, "consulta.html", contexto)
+    return render(request, "consulta.html", {'blocos':blocos})
 
 
 def mostrarEnsalamentoLabs(request):
@@ -19,9 +19,11 @@ def mostrarEnsalamentoLabs(request):
         bloco = request.POST.get('bloco')
         data = request.POST.get('data')
 
-        if not data or not bloco:
+        if not data or bloco != int:
+            bloco = Blocos.objects.all()
             mensagem = 'Data ou Bloco faltando'
-            return render(request, 'consulta.html', {'mensagem':mensagem})
+            return render(request, 'consulta.html', {'mensagem':mensagem,
+                                                     'blocos':bloco})
 
         laboratorios = Laboratorios.objects.filter(bloco_id=bloco).order_by('nome')
 
@@ -57,8 +59,10 @@ def mostrarEnsalamentoLabsNome(request):
     nome_prof = nome_prof.upper()
 
     if not data or not nome_prof:
+        blocos = Blocos.objects.all()
         mensagem = 'Data ou nome do professor faltando'
-        return render(request, 'consulta.html', {'mensagem':mensagem})
+        return render(request, 'consulta.html', {'mensagem':mensagem,
+                                                 'blocos':blocos})
 
     labs_reservados = ReservasLaboratorios.objects.annotate(full_name=Concat('nome_professor', V(' '))).filter(full_name__icontains=nome_prof).filter(data_reserva=data).order_by('nome_laboratorio')
 

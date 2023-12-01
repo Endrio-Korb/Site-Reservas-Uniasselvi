@@ -3,7 +3,7 @@
 {% block content %}
 
 
-    <h4 class="card-title" id='requerido'>{{contexto.mensagem}}</h4>
+    <h4 class="card-title" id='requerido'>{{mensagem}}</h4>
     <div class="row">
         <div class="col-md-4 offset-md-4">
             <div class="card-body">
@@ -14,7 +14,7 @@
 
                     <select name="bloco" >
                         <option Selected>Selecione o Bloco</option>
-                        {% for bloco in contexto.blocos %}
+                        {% for bloco in blocos %}
                             <option value="{{bloco.id_bloco}}">{{bloco.bloco}}</option>
                         {% endfor %}
                     </select>
