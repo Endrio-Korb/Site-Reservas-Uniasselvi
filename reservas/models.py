@@ -23,13 +23,13 @@ class Periodos(models.Model):
 
 class Blocos(models.Model):
     id_bloco = models.IntegerField(null=False, blank=False)
-    bloco = models.CharField(max_length=1, null=False, blank=False, default='x')
+    nome = models.CharField(max_length=1, null=False, blank=False, default='x')
   
     class Meta:
         db_table = "tb_blocos"
 
     def __str__(self):
-        return self.bloco
+        return self.nome
 
 
 class Laboratorios(models.Model):

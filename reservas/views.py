@@ -9,8 +9,12 @@ from django.urls import reverse_lazy
 
 from .forms import LocationForm
 
-from app_professores.models import Professores
+from professores.models import Professores
+
 from consulta import views
+
+
+from datetime import date
 
 def ReservarLaboratorio(request):
     blocos = Blocos.objects.all()
@@ -56,8 +60,8 @@ def registrarReservarLaboratorio(request):
             professor = professor.title()
 
             salva_nome_professor = Professores.objects.create(
-                nome = f'{professor}'
-            )
+               nome = f'{professor}'
+           )
             salva_nome_professor.save()
 
             reserva = ReservasLaboratorios.objects.create(

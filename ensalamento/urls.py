@@ -22,7 +22,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('consulta/', include('consulta.urls', namespace='consulta')),
     path('reservas/', include('reservas.urls', namespace='reservas')),
-    path('professores/', include('app_professores.urls', namespace='professores')),
+    path('professores/', include('professores.urls', namespace='professores')),
 ]
     
 urlpatterns += [path('', RedirectView.as_view(url='/consulta/', permanent=True)),]
