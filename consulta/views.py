@@ -21,7 +21,7 @@ def mostrarEnsalamentoLabs(request):
         data = request.POST.get('data')
     
         blocos = Blocos.objects.all()
-
+        
         if not data or bloco == int:
             mensagem = 'Data ou Bloco faltando'
             return render(request, 'consulta.html', {'mensagem':mensagem,
@@ -47,6 +47,8 @@ def mostrarEnsalamentoLabs(request):
                 contador += 1
                 labs_disponiveis.pop(nome_lab)
 
+        nome_bloco = Blocos.objects.get(id_bloco=bloco)
+
         return render(request, 'ensalamento_labs.html', {'labs_disponiveis': labs_disponiveis,
                                                         'labs_reservados':labs_reservados,
                                                         'data':data,
@@ -67,5 +69,9 @@ def mostrarEnsalamentoLabsNome(request):
 
     labs_reservados = ReservasLaboratorios.objects.annotate(full_name=Concat('nome_professor', V(' '))).filter(full_name__icontains=nome_prof).filter(data_reserva=data).order_by('nome_laboratorio')
 
-    return render(request, 'ensalamento_labs_nome.html', {'labs_reservados': labs_reservados,
-                                                          'data': data})
+    if labs_reservados:
+        return render(request, 'ensalamento_labs_nome.html', {'labs_reservados': labs_reservados,
+                                                            'data': data})
+    else:
+        mensagem = 'Não há laboratórios reservados para esse professor(a)'
+        return render(request, 'ensalamento_labs_nome.html', {'mensagem':mensagem})

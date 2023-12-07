@@ -2,11 +2,17 @@
 
 {% block content %}
 
+    <div class="conteiner text-center">
+        <div class="row">
+            <div class="col">
+                <h4 class="card-title" id='requerido'>{{mensagem}}</h4>
+            </div>
+        </div>
+    </div>
 
-    <h4 class="card-title" id='requerido'>{{mensagem}}</h4>
     <div class="container text-center">
-        <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
-            <div class="row">
+         <form action="{% url 'consulta:ensalamento_labs' %}" method="POST"> {% csrf_token %}
+             <div class="row">
                 <div class="col">
                     <h4 class="card-title">Consulta por Bloco</h4>
                     <h4 class='card-title '>Selecione a data</h4>
