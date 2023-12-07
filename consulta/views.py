@@ -19,12 +19,14 @@ def mostrarEnsalamentoLabs(request):
         bloco = request.POST.get('bloco')
         data = request.POST.get('data')
     
-    
-        if not data or (type(bloco) == int):
-            bloco = Blocos.objects.all()
+        blocos = Blocos.objects.all()
+
+        
+
+        if not data or bloco == int:
             mensagem = 'Data ou Bloco faltando'
             return render(request, 'consulta.html', {'mensagem':mensagem,
-                                                     'blocos':bloco})
+                                                     'blocos':blocos})
 
         laboratorios = Laboratorios.objects.filter(bloco_id=bloco).order_by('nome')
 
@@ -46,10 +48,12 @@ def mostrarEnsalamentoLabs(request):
                 contador += 1
                 labs_disponiveis.pop(nome_lab)
 
+        nome_bloco = Blocos.objects.get(id_bloco=bloco)
+
         return render(request, 'ensalamento_labs.html', {'labs_disponiveis': labs_disponiveis,
                                                         'labs_reservados':labs_reservados,
                                                         'data':data,
-                                                        'bloco':bloco})
+                                                        'nome_bloco':nome_bloco})
 
 
 
