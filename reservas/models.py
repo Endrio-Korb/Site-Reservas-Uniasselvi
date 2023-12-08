@@ -1,4 +1,6 @@
 from django.db import models
+
+from professores.models import Professores
    
 class Status(models.Model):
     id_status = models.IntegerField(null=False, blank=False)
@@ -51,7 +53,7 @@ class ReservasLaboratorios(models.Model):
     bloco = models.ForeignKey(Blocos, on_delete=models.CASCADE)
     data_reserva = models.DateField(null=False, blank=False)
     nome_laboratorio = models.ForeignKey(Laboratorios, on_delete=models.CASCADE)
-    nome_professor = models.CharField(max_length=100, null=False, blank=False)
+    nome_professor = models.ForeignKey(Professores, on_delete=models.CASCADE)
 
     class Meta:
         db_table = "tb_reservas_laboratorios"

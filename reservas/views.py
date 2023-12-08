@@ -18,19 +18,19 @@ from datetime import date
 
 def ReservarLaboratorio(request):
     blocos = Blocos.objects.all()
-    professores = Professores.objects.all()
-    return render(request, 'reserva_labs.html', {'blocos': blocos,
-                                                 'professores':professores})
+    return render(request, 'reserva_labs.html', {'blocos': blocos})
 
 
 def modules(request):
     bloco = request.GET.get('blocos')
 
+    professores = Professores.objects.all()
     laboratorios = Laboratorios.objects.filter(bloco_id=bloco)
     periodos = Periodos.objects.all()
 
     contexto = {'laboratorios': laboratorios,
-                'periodos':periodos,}
+                'periodos':periodos,
+                 'professores':professores}
     return render(request, 'partials/modules.html', contexto)
 
 
@@ -44,6 +44,14 @@ def registrarReservarLaboratorio(request):
         lab = request.POST.get('nome_lab')
         professor = request.POST.get('nome_professor')
 
+        professor = professor.lower()
+        professor = professor.title()
+
+        if not Professores.objects.filter(nome=professor):
+            salva_nome_professor = Professores.objects.create(
+            nome = f'{professor}')
+            salva_nome_professor.save()
+
         verificar_reserva = ReservasLaboratorios.objects.filter(nome_laboratorio_id=lab).filter(data_reserva=data).filter(bloco_id=bloco)
 
         if verificar_reserva:
@@ -56,17 +64,9 @@ def registrarReservarLaboratorio(request):
             return render(request, 'consulta.html', {'contexto':contexto})
         
         else:
-            professor = professor.lower()
-            professor = professor.title()
-
-            salva_nome_professor = Professores.objects.create(
-               nome = f'{professor}'
-           )
-            salva_nome_professor.save()
-
             reserva = ReservasLaboratorios.objects.create(
                 data_reserva = f'{data}',
-                nome_professor = f'{professor}',
+                nome_professor = Professores.objects.get(nome=professor),
                 periodo_id = f'{periodo}',
                 nome_laboratorio = Laboratorios.objects.get(id=lab),
                 bloco_id = f'{bloco}',
