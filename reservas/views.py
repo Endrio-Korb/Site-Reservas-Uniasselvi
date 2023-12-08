@@ -50,9 +50,9 @@ def registrarReservarLaboratorio(request):
             nome_lab = Laboratorios.objects.get(id=lab)
             str_periodo = Periodos.objects.get(id=periodo)
 
-            mensagem = f'{nome_lab} já está reservado no periodo {str_periodo} para data {data} '
+            erro = f'{nome_lab} já está reservado no periodo {str_periodo} para data {data} '
             contexto = {'blocos': blocos,
-                         'mensagem': mensagem}
+                         'erro': erro}
             return render(request, 'consulta.html', {'contexto':contexto})
         
         else:
